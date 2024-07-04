@@ -3,7 +3,7 @@ class Solution:
          def backtrack(row: int):
             # Base case: if all queens are placed
             if row == n:
-                board = []
+                board = [] #self.count+=1  (for counting number of solutions
                 for i in range(n):
                     board.append(''.join('Q' if col == queens[i] else '.' for col in range(n)))
                 solutions.append(board)
@@ -22,8 +22,8 @@ class Solution:
                     return False
             return True
 
-         solutions = []
+         solutions = []  #self.count=0
          queens = [-1] * n  # queens[row] = col means a queen is placed at (row, col)
          backtrack(0)
-         return solutions
+         return solutions  #self.count
         
