@@ -1,0 +1,29 @@
+class Solution:
+    def solveNQueens(self, n: int) -> List[List[str]]:
+         def backtrack(row: int):
+            # Base case: if all queens are placed
+            if row == n:
+                board = []
+                for i in range(n):
+                    board.append(''.join('Q' if col == queens[i] else '.' for col in range(n)))
+                solutions.append(board)
+                return
+            
+            for col in range(n):
+                if is_safe(row, col):
+                    queens[row] = col
+                    backtrack(row + 1)
+                    queens[row] = -1  # Reset state
+        
+         def is_safe(row: int, col: int) -> bool:
+            for prev_row in range(row):
+                if queens[prev_row] == col or \
+                   abs(queens[prev_row] - col) == abs(prev_row - row):
+                    return False
+            return True
+
+         solutions = []
+         queens = [-1] * n  # queens[row] = col means a queen is placed at (row, col)
+         backtrack(0)
+         return solutions
+        
